@@ -61,6 +61,12 @@ npm run build
 
 `netlify.toml` 与构建时复制到 `dist/_redirects` 的 `public/_redirects` 均配置了 SPA 回退。部署后直接访问或刷新 `/projects`、`/calendar` 等地址，会返回应用入口并由 Vue Router 渲染对应页面。无需设置环境变量或数据库。
 
+## Cloudflare Pages 部署
+
+在 Cloudflare Dashboard 的 **Workers & Pages → Create application → Pages → Import an existing Git repository** 中连接公开仓库 `Sywen0019/StudySteady`，生产分支选择 `main`。构建命令设为 `npm run build`，输出目录设为 `dist`；项目中的 `.nvmrc` 固定 Node.js 版本为 22.12.0。
+
+连接 GitHub 后，推送到 `main` 会自动部署；`public/_redirects` 会随构建复制到 `dist`，支持直接访问和刷新 Vue Router 子路由。首次连接仍需在 Cloudflare Dashboard 中登录并授权 GitHub 仓库。
+
 ## 主要目录
 
 ```text
