@@ -10,6 +10,7 @@ const { state } = useStudyStore();
 const search = ref("");
 const initials = computed(() => state.settings.name?.slice(0, 1) || "学");
 function submit() {
+  // 全局搜索不维护独立结果页，而是带上查询参数跳转，由项目页的筛选逻辑统一展示。
   if (search.value.trim()) {
     router.push({ path: "/projects", query: { search: search.value.trim() } });
     search.value = "";

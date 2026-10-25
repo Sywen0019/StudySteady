@@ -30,6 +30,7 @@ const selectedDate = ref(today);
 const todayTasks = computed(() =>
   state.tasks.filter((t) => t.dueDate === today),
 );
+// 今日完成按实际完成时间统计，因此可能包含截止日不在今天的任务。
 const completedToday = computed(
   () =>
     state.tasks.filter(
@@ -39,6 +40,7 @@ const completedToday = computed(
         dateKey(new Date(t.completedAt)) === today,
     ).length,
 );
+// 先把已完成任务排到末尾，同一完成状态内再按高、中、低优先级排序。
 const dayTasks = computed(() =>
   state.tasks
     .filter((t) => t.dueDate === selectedDate.value)

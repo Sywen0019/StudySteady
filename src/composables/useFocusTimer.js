@@ -6,7 +6,7 @@ export const FOCUS_STORAGE_KEY = "studysteady-focus-v1";
 const newSessionId = () =>
   `focus-${globalThis.crypto?.randomUUID?.() || `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`}`;
 
-/** One timer for the whole app, with a wall-clock deadline instead of interval drift. */
+/** 按真实截止时间计算剩余秒数，避免后台标签页定时回调变慢导致计时漂移；依赖可注入以便测试。 */
 export function createFocusTimer({
   store = useStudyStore(),
   storage,
@@ -66,7 +66,7 @@ export function createFocusTimer({
   function finish() {
     if (completing || !running.value) return;
     completing = true;
-    // A stable id makes recovery safe if the tab closes after recording but before reset.
+    // 先记录再重置；若两步之间关闭页面，恢复时仍用同一编号，由数据层去重。
     const recorded = addSession(duration.value / 60, taskId.value, {
       id: sessionId.value,
       date: dateKey(new Date(deadline.value)),
@@ -132,7 +132,7 @@ export function createFocusTimer({
             ? saved.sessionId
             : newSessionId();
         configuredMinutes = saved.configuredMinutes || saved.duration / 60;
-        // Settings edited while this page was closed apply to idle/paused timers too.
+        // 页面关闭期间若修改过设置，空闲或暂停中的旧计时应改用新的专注时长。
         if (!running.value && configuredMinutes !== state.settings.focusMinutes)
           reset();
         else {
@@ -195,6 +195,7 @@ export function createFocusTimer({
   };
 }
 
+// 页面组件只获取共享实例；切换路由不会创建新计时器，也不会中断当前专注。
 let timer;
 export function useFocusTimer() {
   if (!timer) timer = createFocusTimer();

@@ -16,6 +16,7 @@ import { useStudyStore } from "../../stores/study";
 defineProps({ open: Boolean });
 const emit = defineEmits(["close"]);
 const { state, openProject } = useStudyStore();
+// 侧栏角标仅统计未完成任务，完成或删除后会立即减少。
 const remaining = computed(
   () => state.tasks.filter((t) => t.status !== "done").length,
 );

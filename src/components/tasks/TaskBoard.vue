@@ -11,6 +11,7 @@ const columns = [
   { value: "done", label: "已完成", color: "#4a8665" },
 ];
 function drop(event, status) {
+  // TaskCard 拖拽时仅传任务 ID；看板通知父页面更新状态，不直接修改传入任务。
   const id = event.dataTransfer.getData("text/plain");
   if (id) emit("status-change", { id, status });
   draggingOver.value = "";

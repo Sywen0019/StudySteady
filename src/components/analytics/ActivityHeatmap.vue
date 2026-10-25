@@ -8,6 +8,7 @@ const props = defineProps({
   today: { type: String, required: true },
 });
 const days = computed(() => {
+  // 从本周一向前取 11 周，生成含本周在内的 12 周网格。
   const start = addDays(startOfWeek(props.today), -77);
   const minutes = new Map();
   const completed = new Map();
@@ -32,6 +33,7 @@ const days = computed(() => {
       minutes: total,
       completed: count,
       future: date > props.today,
+      // 颜色主要按专注分钟分级；仅完成任务、没有专注记录也算最低一级活动。
       level:
         total >= 90
           ? 4

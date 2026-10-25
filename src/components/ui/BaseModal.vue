@@ -14,6 +14,7 @@ function handleKey(event) {
   if (!nodes?.length) return;
   const first = nodes[0],
     last = nodes[nodes.length - 1];
+  // 在首尾可聚焦元素间循环，防止 Tab 或 Shift+Tab 把焦点移到弹窗外。
   if (event.shiftKey && document.activeElement === first) {
     event.preventDefault();
     last.focus();
@@ -26,6 +27,7 @@ onMounted(async () => {
   document.body.style.overflow = "hidden";
   document.addEventListener("keydown", handleKey);
   await nextTick();
+  // 子表单可能已主动聚焦输入框；仅在焦点仍在弹窗外时使用容器兜底。
   if (!dialog.value?.contains(document.activeElement)) dialog.value?.focus();
 });
 onUnmounted(() => {

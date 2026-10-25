@@ -6,6 +6,7 @@ import { useStudyStore } from "../../stores/study";
 const { state, ui, today, saveTask, deleteTask, confirmAction, notify } =
   useStudyStore();
 const editing = computed(() => !!ui.editingTask);
+// 用独立表单承接编辑值；后展开的数据覆盖默认值，取消时不会提前改动原任务。
 const form = reactive({
   title: "",
   description: "",

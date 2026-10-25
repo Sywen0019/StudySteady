@@ -9,10 +9,12 @@ import ToastMessage from "./components/ui/ToastMessage.vue";
 import { useStudyStore } from "./stores/study";
 import { useFocusTimer } from "./composables/useFocusTimer.js";
 const { state, ui, notify } = useStudyStore();
+// 在根组件初始化共享计时器，即使当前不在总览页，也能恢复并完成上一次专注。
 useFocusTimer();
 const menuOpen = ref(false);
 const media = window.matchMedia("(prefers-color-scheme: dark)");
 function applyTheme() {
+  // 主题偏好可能是 system，根节点只接收最终的 light/dark，CSS 变量据此切换。
   document.documentElement.dataset.theme =
     state.settings.theme === "system"
       ? media.matches

@@ -30,6 +30,7 @@ watch(
     state.settings.name,
     state.settings.dailyGoal,
     state.settings.focusMinutes,
+    // 恢复数据后即使这三个设置值未变，也重新同步草稿，清除尚未保存的输入。
     ui.dataRevision,
   ],
   ([name, dailyGoal, focusMinutes]) => {
@@ -71,6 +72,7 @@ async function importBackup(event) {
   try {
     if (file.size > 5 * 1024 * 1024) throw new Error("备份文件不能超过 5 MB");
     const content = await file.text();
+    // 此处仅检查 JSON 语法；确认替换后再由 store.importData 校验并导入数据。
     JSON.parse(content);
     confirmAction({
       title: "用备份恢复学习数据？",
@@ -95,6 +97,7 @@ async function importBackup(event) {
     );
   } finally {
     importing.value = false;
+    // 清空文件选择，让下次选择同一个文件时仍能触发 change。
     event.target.value = "";
   }
 }

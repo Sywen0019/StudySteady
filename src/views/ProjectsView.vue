@@ -48,6 +48,7 @@ watch(
     filters.value.status = typeof value === "string" ? value : "all";
   },
 );
+// 项目筛选回写 URL 时先比较，避免与上方路由监听相互触发重复导航；保留其他查询参数。
 watch(
   () => filters.value.project,
   (value) => {
@@ -72,6 +73,7 @@ const filteredTasks = computed(() => {
           (f.project === "none"
             ? !task.projectId
             : task.projectId === f.project)) &&
+        // “逾期”是按截止日动态判断的筛选条件，不是任务实际存储的状态。
         (f.status === "all" ||
           (f.status === "overdue"
             ? task.dueDate && task.dueDate < today && task.status !== "done"
@@ -79,6 +81,7 @@ const filteredTasks = computed(() => {
         (f.priority === "all" || task.priority === f.priority),
     )
     .slice()
+    // 默认排序优先展示未完成任务；无截止日时用较大的占位值排在同组末尾。
     .sort((a, b) =>
       sort.value === "priority"
         ? priorityOrder[a.priority] - priorityOrder[b.priority]

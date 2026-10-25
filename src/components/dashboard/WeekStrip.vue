@@ -3,6 +3,7 @@ import { computed } from "vue";
 import { dateKey, addDays, startOfWeek } from "../../utils/date";
 const props = defineProps({ modelValue: String, today: String, tasks: Array });
 defineEmits(["update:modelValue"]);
+// 日期条固定从本周一开始；角点只标记还有未完成任务的日子。
 const days = computed(() =>
   Array.from({ length: 7 }, (_, i) => {
     const date = addDays(startOfWeek(props.today), i);

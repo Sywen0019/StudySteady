@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
   history: createWebHistory(),
+  // 动态导入按路由拆分页面代码，进入对应页面时才加载该视图。
   routes: [
     {
       path: "/",

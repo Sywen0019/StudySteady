@@ -3,6 +3,7 @@ import BaseModal from "./BaseModal.vue";
 import { useStudyStore } from "../../stores/study";
 const { ui, notify } = useStudyStore();
 async function confirm() {
+  // 先保留回调再关闭确认框；即使操作异步完成，也不会重复点击同一确认按钮。
   const action = ui.confirmation.action;
   ui.confirmation = null;
   try {

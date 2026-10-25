@@ -11,6 +11,7 @@ const { projectById, toggleTask, openTask, today } = useStudyStore();
 const project = computed(() => projectById(props.task.projectId));
 const priorities = { high: "高优先级", medium: "中优先级", low: "低优先级" };
 function toggle() {
+  // 状态写入 store 后再通知父组件，父组件可用这个事件做额外统计或提示。
   toggleTask(props.task.id);
   emit("toggle", props.task);
 }

@@ -5,6 +5,7 @@ import BaseModal from "../ui/BaseModal.vue";
 import { useStudyStore } from "../../stores/study";
 const { ui, today, saveProject, deleteProject, confirmAction, notify } =
   useStudyStore();
+// 将项目字段复制到表单，输入只修改草稿，提交时才交给 store 保存。
 const form = reactive({
   name: "",
   description: "",

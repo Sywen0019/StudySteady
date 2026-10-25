@@ -21,6 +21,7 @@ const completed = computed(
   () => tasks.value.filter((task) => task.status === "done").length,
 );
 const progress = computed(() => projectProgress(props.project.id));
+// 项目只存储图标名称，渲染时再映射为组件，因此备份文件不依赖组件引用。
 const icon = computed(
   () =>
     ({

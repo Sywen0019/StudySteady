@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Noto+Sans+SC:wght@400;450;500;550;600;650;700&display=swap");
 
+/* 设计变量集中定义在 :root，组件统一通过 var() 引用；深色主题只覆盖变量值。 */
 :root {
   font-family: "DM Sans", "Noto Sans SC", "Microsoft YaHei", sans-serif;
   color: #343c35;
@@ -1465,6 +1466,7 @@ kbd {
   color: #d1c29d;
 }
 
+/* 布局按宽度逐级调整：1550 起加宽内容，之后在 1190/980/760/520 依次收起侧栏和多列网格。 */
 @media (min-width: 1550px) {
   .dashboard-columns {
     grid-template-columns: minmax(0, 1fr) 340px;

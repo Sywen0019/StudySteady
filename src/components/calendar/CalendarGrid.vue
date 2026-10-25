@@ -12,6 +12,7 @@ defineEmits(["select-date"]);
 const weekDays = ["一", "二", "三", "四", "五", "六", "日"];
 const cells = computed(() => {
   const first = new Date(`${props.month}T12:00:00`);
+  // getDay() 以周日为 0，转为周一开头的偏移后，用相邻月份补齐固定六行。
   const offset = (first.getDay() + 6) % 7;
   const start = new Date(first);
   start.setDate(1 - offset);

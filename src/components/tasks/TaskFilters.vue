@@ -6,6 +6,7 @@ const props = defineProps({
 });
 const emit = defineEmits(["update:modelValue"]);
 function update(key, value) {
+  // 保留其余筛选项并发出新对象，由父组件的 v-model 接收，避免直接修改 prop。
   emit("update:modelValue", { ...props.modelValue, [key]: value });
 }
 </script>

@@ -1,4 +1,4 @@
-/** Local calendar dates are kept as YYYY-MM-DD, without UTC conversion. */
+/** 按本地日历生成 YYYY-MM-DD；纯日期按本地中午解析，避免按 UTC 解析后跨到前一天。 */
 export function dateKey(value = new Date()) {
   const date =
     typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value)
@@ -25,6 +25,7 @@ export function formatDate(value, options = {}) {
 
 export function startOfWeek(value = new Date()) {
   const date = new Date(`${dateKey(value)}T12:00:00`);
+  // getDay() 以周日为 0；偏移后以周一为一周起点，与周条和统计图保持一致。
   return addDays(date, -((date.getDay() + 6) % 7));
 }
 

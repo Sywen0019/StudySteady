@@ -22,6 +22,7 @@ const { state, today, projectProgress, tasksForProject } = store;
 const period = ref(7);
 const rangeStart = computed(() => addDays(today, 1 - period.value));
 const inRange = (date) => date && date >= rangeStart.value && date <= today;
+// 完成率的任务范围：截止日或完成日落在所选期间；并非只统计期间内完成的任务。
 const trackedTasks = computed(() =>
   state.tasks.filter(
     (task) =>
@@ -32,6 +33,7 @@ const trackedTasks = computed(() =>
 const completedTasks = computed(
   () => trackedTasks.value.filter((task) => task.status === "done").length,
 );
+// “完成任务”计数单独按实际完成日统计，与上面完成率的口径区分。
 const completedDuringPeriod = computed(
   () =>
     state.tasks.filter(

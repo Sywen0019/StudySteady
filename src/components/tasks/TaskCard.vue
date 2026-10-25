@@ -18,6 +18,7 @@ const priorityLabels = {
   low: "低优先级",
 };
 function onDrag(event) {
+  // 看板约定拖拽数据只传任务 ID，接收列据此更新状态，避免直接传递可变对象。
   event.dataTransfer.setData("text/plain", props.task.id);
   event.dataTransfer.effectAllowed = "move";
 }

@@ -29,7 +29,7 @@ const isTimestamp = (value) =>
 const text = (value, fallback = "") =>
   typeof value === "string" ? value.trim() : fallback;
 
-/** Validate before replacing state, so a broken backup never destroys existing work. */
+/** 导入前校验字段和关联关系，并只保留已知字段；校验失败时不改动现有数据。 */
 export function validateData(input) {
   if (
     !input ||
@@ -151,6 +151,7 @@ try {
   loadFailed = true;
 }
 
+// 模块级单例让所有页面共享同一份状态；业务数据会持久化，弹窗等临时 UI 状态不会。
 const state = reactive(initialData);
 const ui = reactive({
   taskModal: false,
@@ -196,6 +197,7 @@ function persist() {
   }
 }
 
+// 深度监听也能捕获数组项和设置字段的修改；整体替换时暂缓保存，避免写入过渡状态。
 let replacing = false;
 watch(
   state,
@@ -204,6 +206,7 @@ watch(
   },
   { deep: true, flush: "sync" },
 );
+// 读取失败时保留存储中的原始内容，避免启动后立即用演示数据覆盖它。
 if (!loadFailed) persist();
 
 const projectById = (id) => state.projects.find((project) => project.id === id);
@@ -219,6 +222,7 @@ function projectProgress(id) {
     : 0;
 }
 function openTask(task = null, defaults = {}) {
+  // 编辑器接收副本，取消编辑不会提前修改任务；defaults 用于预填日期、项目等字段。
   ui.editingTask = task ? { ...task } : null;
   ui.taskDefaults = { ...defaults };
   ui.taskModal = true;
@@ -283,6 +287,7 @@ function deleteTask(id) {
   const index = state.tasks.findIndex((task) => task.id === id);
   if (index < 0) return;
   state.tasks.splice(index, 1);
+  // 保留已投入的专注时长，只解除对已删除任务的关联，避免历史统计丢失。
   state.sessions.forEach((session) => {
     if (session.taskId === id) session.taskId = "";
   });
@@ -327,6 +332,7 @@ function addSession(minutes, taskId = "", options = {}) {
   if (!Number.isFinite(duration) || duration <= 0 || duration > 1440)
     throw new Error("专注时长应在 1 到 1440 分钟之间。");
   const id = options.id || uid();
+  // 同一轮计时恢复后可能再次提交，按记录编号去重，防止累计两次专注时长。
   if (state.sessions.some((session) => session.id === id)) return false;
   const date = options.date || dateKey();
   if (!isDate(date)) throw new Error("专注记录日期不正确。");
@@ -347,9 +353,11 @@ function exportData() {
 }
 function replaceData(data) {
   replacing = true;
+  // 保留 reactive 对象身份，让已解构 state 的页面继续收到更新。
   Object.assign(state, data);
   replacing = false;
   persist();
+  // 通知计时器重置，避免把旧数据中的计时结果写进新导入的数据。
   ui.dataRevision += 1;
 }
 function importData(contents) {

@@ -23,6 +23,7 @@ const {
     <div class="timer-face" :class="{ running }">
       <svg viewBox="0 0 200 200" aria-hidden="true">
         <circle cx="100" cy="100" r="87" class="timer-track" />
+        <!-- 圆周长 2πr≈547，用虚线偏移量把进度映射为环形长度；进度变化由上方计时器计算。 -->
         <circle
           cx="100"
           cy="100"

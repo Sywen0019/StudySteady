@@ -4,6 +4,7 @@ import { Clock3, CheckCheck } from "lucide-vue-next";
 
 const props = defineProps({ days: { type: Array, required: true } });
 const metric = ref("minutes");
+// 为纵轴保留最低量程，避免记录很少时柱形被过度放大。
 const maximum = computed(() =>
   Math.max(
     metric.value === "minutes" ? 60 : 4,

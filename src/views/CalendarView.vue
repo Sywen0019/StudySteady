@@ -57,6 +57,7 @@ function moveMonth(step) {
   month.value = dateKey(date);
 }
 function selectDate(date) {
+  // 网格包含相邻月份的日期；选中补位日期时同步切换展示月份。
   selectedDate.value = date;
   if (date.slice(0, 7) !== month.value.slice(0, 7))
     month.value = `${date.slice(0, 7)}-01`;

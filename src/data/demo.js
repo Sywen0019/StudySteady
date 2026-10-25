@@ -1,5 +1,6 @@
 import { addDays, dateKey } from "../utils/date.js";
 
+// 用参考日生成相对日期，首次打开和恢复演示时都能看到近期任务，而非固定的过期样例。
 export function createDemoData(referenceDate = dateKey()) {
   const createdAt = `${addDays(referenceDate, -20)}T08:00:00.000+08:00`;
   const projects = [
