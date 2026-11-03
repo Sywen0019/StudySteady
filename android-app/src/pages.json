@@ -1,0 +1,19 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "StudySteady",
+        "navigationBarTextStyle": "black",
+        "app-plus": {
+          "background": "#ffffff"
+        },
+        "disableScroll": true
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTitleText": "StudySteady"
+  }
+}

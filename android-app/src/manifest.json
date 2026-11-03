@@ -1,0 +1,28 @@
+{
+    "name" : "StudySteady",
+    "appid" : "__UNI__175F396",
+    "description" : "StudySteady 远程 WebView 最小 Android 验证工程",
+    "versionName" : "0.1.0",
+    "versionCode" : "1",
+    "vueVersion" : "3",
+    "transformPx" : false,
+    "app-plus" : {
+        "usingComponents" : true,
+        "compilerVersion" : 3,
+        "modules" : {},
+        "distribute" : {
+            "android" : {
+                "permissions" : [ "<uses-permission android:name=\"android.permission.INTERNET\"/>" ]
+            },
+            "ios" : {
+                "dSYMs" : false
+            }
+        }
+    },
+    "h5" : {
+        "title" : "StudySteady"
+    },
+    "uniStatistics" : {
+        "enable" : false
+    }
+}

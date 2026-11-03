@@ -210,7 +210,7 @@ const projectRows = computed(() =>
   gap: 3px;
   padding: 4px;
   border: 1px solid var(--border);
-  border-radius: 9px;
+  border-radius: 14px;
   background: var(--surface);
 }
 .period-switch button {
@@ -219,7 +219,7 @@ const projectRows = computed(() =>
   background: transparent;
   color: var(--muted);
   font-size: 12px;
-  border-radius: 6px;
+  border-radius: 10px;
   cursor: pointer;
 }
 .period-switch button.active {
@@ -232,6 +232,10 @@ const projectRows = computed(() =>
   grid-template-columns: minmax(0, 1.9fr) minmax(250px, 1fr);
   gap: 23px;
   margin-bottom: 23px;
+}
+.analytics-charts > *,
+.analytics-bottom > * {
+  min-width: 0;
 }
 .analytics-bottom {
   display: grid;
@@ -248,6 +252,7 @@ const projectRows = computed(() =>
   justify-content: space-between;
   gap: 10px;
   margin-bottom: 23px;
+  flex-wrap: wrap;
 }
 .subtle-link {
   font-size: 11px;
@@ -270,6 +275,7 @@ const projectRows = computed(() =>
   text-decoration: none;
   color: var(--text);
   display: block;
+  min-width: 0;
 }
 .project-progress-info {
   display: flex;
@@ -289,6 +295,7 @@ const projectRows = computed(() =>
   margin-left: auto;
   color: var(--muted);
   font-size: 11px;
+  flex-shrink: 0;
 }
 .project-color {
   width: 7px;
@@ -320,10 +327,12 @@ const projectRows = computed(() =>
     gap: 22px;
   }
 }
-@media (max-width: 800px) {
+@media (max-width: 1200px) {
   .analytics-charts {
     grid-template-columns: 1fr;
   }
+}
+@media (max-width: 800px) {
   .analytics-stats {
     gap: 12px;
   }

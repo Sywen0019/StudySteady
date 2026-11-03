@@ -25,7 +25,7 @@ const circumference = 2 * Math.PI * 70;
           cy="90"
           r="70"
           fill="none"
-          stroke="var(--bg)"
+          stroke="var(--surface-soft)"
           stroke-width="14"
         />
         <circle
@@ -69,14 +69,15 @@ const circumference = 2 * Math.PI * 70;
 <style scoped>
 .completion-panel {
   padding: 25px 24px;
+  min-width: 0;
 }
 .completion-panel > p {
   font-size: 12px;
   margin: 8px 0 0;
 }
 .ring-wrap {
-  width: 183px;
-  height: 183px;
+  width: min(183px, 100%);
+  aspect-ratio: 1;
   margin: 22px auto 19px;
   position: relative;
 }
@@ -116,6 +117,7 @@ const circumference = 2 * Math.PI * 70;
   justify-content: center;
   gap: 25px;
   font-size: 11px;
+  flex-wrap: wrap;
 }
 .completion-counts div {
   display: flex;
@@ -129,7 +131,7 @@ const circumference = 2 * Math.PI * 70;
   background: var(--green);
 }
 .completion-counts i.pending {
-  background: #d7ded2;
+  background: color-mix(in srgb, var(--muted) 30%, var(--surface-soft));
 }
 .completion-counts span {
   color: var(--muted);

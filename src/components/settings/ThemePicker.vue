@@ -3,7 +3,7 @@ import { Sun, Moon, Monitor, Check } from "lucide-vue-next";
 defineProps({ modelValue: { type: String, default: "light" } });
 defineEmits(["update:modelValue"]);
 const themes = [
-  { value: "light", label: "日间 · 温暖纸白", icon: Sun },
+  { value: "light", label: "日间 · 清透晨光", icon: Sun },
   { value: "dark", label: "夜间 · 静谧深林", icon: Moon },
   { value: "system", label: "跟随系统", icon: Monitor },
 ];
@@ -57,9 +57,9 @@ const themes = [
 .theme-preview {
   height: 102px;
   border: 2px solid var(--border);
-  border-radius: 9px;
+  border-radius: 15px;
   display: flex;
-  background: #faf9f6;
+  background: linear-gradient(135deg, #d9eee3, #e5f0f6);
   overflow: hidden;
   position: relative;
   transition: border-color 0.15s;
@@ -70,7 +70,7 @@ const themes = [
 .preview-sidebar {
   width: 24%;
   border-right: 1px solid #e9e8e2;
-  background: #f2f3ed;
+  background: #f8fffb99;
   padding: 19px 8px;
 }
 .preview-sidebar span {
@@ -103,7 +103,8 @@ const themes = [
 }
 .preview-content > div span {
   height: 18px;
-  background: #e5eadd;
+  background: #ffffffa6;
+  box-shadow: inset 0 1px 0 #fff, 0 2px 4px #244c3821;
   flex: 1;
   border-radius: 3px;
 }
@@ -116,11 +117,11 @@ const themes = [
   margin: 6px 0;
 }
 .dark {
-  background: #232b25;
+  background: linear-gradient(135deg, #1a3a2f, #1c303c);
   border-color: #40493f;
 }
 .dark .preview-sidebar {
-  background: #1c241f;
+  background: #1f3d338c;
   border-color: #394238;
 }
 .dark .preview-sidebar span {
@@ -133,13 +134,14 @@ const themes = [
   background: #7b8a73;
 }
 .dark .preview-content > div span {
-  background: #374233;
+  background: #42635180;
+  box-shadow: inset 0 1px 0 #e6fff51a, 0 2px 4px #0002;
 }
 .dark .preview-content > b {
   background: #394537;
 }
 .system {
-  background: linear-gradient(120deg, #faf9f6 0 54%, #232b25 54% 100%);
+  background: linear-gradient(120deg, #d9eee3 0 54%, #1c303c 54% 100%);
 }
 .theme-check {
   position: absolute;

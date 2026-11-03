@@ -268,18 +268,22 @@ function newTask() {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 9px;
+  font-size: 11px;
   color: var(--muted, #7d837c);
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .calendar-legend i {
   width: 6px;
   height: 6px;
   border-radius: 50%;
+  flex-shrink: 0;
 }
 .calendar-aside {
   display: flex;
   flex-direction: column;
   gap: 19px;
+  min-width: 0;
 }
 .day-panel {
   overflow: hidden;
@@ -294,7 +298,7 @@ function newTask() {
   color: var(--green, #326650);
 }
 .day-panel-heading .eyebrow {
-  font-size: 8px;
+  font-size: 9px;
   letter-spacing: 0.12em;
 }
 .day-panel-heading h2 {
@@ -305,7 +309,7 @@ function newTask() {
   margin: 9px 0 0;
 }
 .day-panel-heading h2 span {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 400;
   color: var(--muted, #7d837c);
 }
@@ -313,7 +317,7 @@ function newTask() {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 9px;
+  font-size: 11px;
   color: var(--muted, #7d837c);
   padding: 0 20px 16px;
   border-bottom: 1px solid var(--border, #e5e8e0);
@@ -329,10 +333,10 @@ function newTask() {
   gap: 9px;
 }
 .day-tasks :deep(.task-row-title) {
-  font-size: 11px;
+  font-size: 12px;
 }
 .day-tasks :deep(.task-row-meta) {
-  font-size: 8px;
+  font-size: 10px;
   gap: 5px;
   flex-wrap: wrap;
 }
@@ -344,18 +348,18 @@ function newTask() {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  font-size: 10px;
+  font-size: 12px;
   color: var(--green, #326650);
-  background: var(--background, #f6f7f2);
+  background: var(--surface-soft);
   border: 1px dashed var(--border, #e5e8e0);
-  border-radius: 7px;
+  border-radius: 12px;
   margin: 16px 18px;
   width: calc(100% - 36px);
   padding: 10px;
   cursor: pointer;
 }
 .day-tip {
-  font-size: 9px;
+  font-size: 11px;
   color: var(--muted, #7d837c);
   text-align: center;
   margin: 0 12px 17px;
@@ -374,7 +378,7 @@ function newTask() {
   padding: 23px 20px;
 }
 .month-summary > .eyebrow {
-  font-size: 8px;
+  font-size: 9px;
 }
 .month-summary h3 {
   font-size: 15px;
@@ -382,7 +386,7 @@ function newTask() {
 }
 .month-summary-numbers {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 4px;
 }
 .month-summary-numbers div {
@@ -407,7 +411,7 @@ function newTask() {
   font-size: 12px;
 }
 .month-summary-numbers span {
-  font-size: 9px;
+  font-size: 11px;
   color: var(--muted, #7d837c);
 }
 .month-summary > a {
@@ -418,7 +422,7 @@ function newTask() {
   padding-top: 17px;
   margin-top: 23px;
   text-decoration: none;
-  font-size: 10px;
+  font-size: 12px;
   color: var(--green, #326650);
 }
 .upcoming-section {
@@ -429,6 +433,8 @@ function newTask() {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 14px;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 .upcoming-heading .muted {
   font-size: 10px;
@@ -441,7 +447,7 @@ function newTask() {
 .upcoming-card {
   text-align: left;
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 13px;
   padding: 19px;
   color: var(--text, #253c30);
@@ -453,12 +459,13 @@ function newTask() {
   gap: 6px;
   grid-column: 1/-1;
   color: var(--muted, #7d837c);
-  font-size: 10px;
+  font-size: 11px;
 }
 .upcoming-card strong {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   line-height: 1.7;
+  overflow-wrap: anywhere;
 }
 .upcoming-card > svg {
   color: var(--green, #326650);
@@ -490,7 +497,7 @@ function newTask() {
     grid-template-columns: 1fr;
   }
   .upcoming-heading .muted {
-    font-size: 9px;
+    font-size: 10px;
   }
   .calendar-layout {
     gap: 16px;

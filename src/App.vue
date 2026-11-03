@@ -34,8 +34,8 @@ onUnmounted(() => media.removeEventListener("change", applyTheme));
   <div class="app-shell">
     <a class="skip-link" href="#main-content">跳到主要内容</a
     ><AppSidebar :open="menuOpen" @close="menuOpen = false" />
-    <div class="app-main">
-      <AppTopbar @menu="menuOpen = !menuOpen" />
+    <div class="app-main" :inert="menuOpen || undefined">
+      <AppTopbar :menu-open="menuOpen" @menu="menuOpen = !menuOpen" />
       <div v-if="ui.storageError" class="storage-alert" role="alert">
         本地数据暂时无法保存或读取，请先备份当前学习记录。
         <RouterLink to="/settings">前往数据备份 →</RouterLink>

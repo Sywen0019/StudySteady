@@ -263,6 +263,7 @@ function changeStatus({ id, status }) {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 14px;
   margin: 0 0 16px;
 }
 .project-section-heading h2 span {
@@ -294,24 +295,30 @@ function changeStatus({ id, status }) {
   display: flex;
   align-items: center;
   gap: 9px;
+  min-width: 0;
 }
 .task-section-title h2 {
   margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .count-pill {
   padding: 2px 7px;
   background: var(--surface, #fff);
   border: 1px solid var(--border, #e5e8e0);
   font-size: 10px;
-  border-radius: 5px;
+  border-radius: 8px;
+  flex-shrink: 0;
   color: var(--muted, #7d837c);
 }
 .view-switch {
   display: flex;
   gap: 3px;
-  padding: 3px;
+  padding: 4px;
   border: 1px solid var(--border, #e5e8e0);
-  border-radius: 8px;
+  border-radius: 13px;
+  background: var(--surface-soft);
+  flex-shrink: 0;
 }
 .view-switch button {
   display: flex;
@@ -320,7 +327,7 @@ function changeStatus({ id, status }) {
   cursor: pointer;
   border: 0;
   background: transparent;
-  border-radius: 5px;
+  border-radius: 9px;
   color: var(--muted, #7d837c);
   padding: 7px 11px;
   font-size: 11px;
@@ -334,6 +341,7 @@ function changeStatus({ id, status }) {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
   font-size: 10px;
   color: var(--muted, #7d837c);
   padding: 17px 1px 13px;
@@ -342,6 +350,7 @@ function changeStatus({ id, status }) {
   display: flex;
   align-items: center;
   gap: 5px;
+  flex-shrink: 0;
 }
 .task-results-bar select {
   background: transparent;
@@ -349,7 +358,11 @@ function changeStatus({ id, status }) {
   color: inherit;
   font-size: 10px;
   cursor: pointer;
-  outline: 0;
+}
+.task-results-bar select:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 .task-list {
   overflow: hidden;
@@ -358,7 +371,7 @@ function changeStatus({ id, status }) {
   display: flex;
   justify-content: space-between;
   padding: 14px 69px 14px 23px;
-  background: var(--background, #f6f7f2);
+  background: var(--surface-soft);
   font-size: 10px;
   color: var(--muted, #7d837c);
   border-bottom: 1px solid var(--border, #e5e8e0);
@@ -405,9 +418,18 @@ function changeStatus({ id, status }) {
     margin-top: 25px;
   }
 }
-@media (max-width: 360px) {
+@media (max-width: 480px) {
   .projects-grid {
     grid-template-columns: 1fr;
+  }
+  .task-workspace-heading {
+    flex-wrap: wrap;
+  }
+  .task-section-title {
+    flex: 1 1 150px;
+  }
+  .project-section-heading h2 {
+    font-size: 15px;
   }
 }
 </style>

@@ -95,7 +95,7 @@ function accessibleLabel(cell) {
 .calendar-weekday {
   text-align: center;
   padding: 16px 2px;
-  font-size: 10px;
+  font-size: 11px;
   color: var(--muted, #7d837c);
   border-bottom: 1px solid var(--border, #e5e8e0);
 }
@@ -109,7 +109,7 @@ function accessibleLabel(cell) {
   flex-direction: column;
   align-items: stretch;
   text-align: left;
-  background: var(--surface, #fff);
+  background: transparent;
   cursor: pointer;
   color: var(--text, #253c30);
   min-width: 0;
@@ -123,25 +123,21 @@ function accessibleLabel(cell) {
   border-bottom: 0;
 }
 .calendar-cell:hover {
-  background: var(--background, #f6f7f2);
+  background: var(--surface-soft);
 }
 .calendar-cell.outside {
-  background: color-mix(
-    in srgb,
-    var(--background, #f6f7f2) 65%,
-    var(--surface, #fff)
-  );
+  background: color-mix(in srgb, var(--surface-soft) 55%, transparent);
 }
 .calendar-cell.outside .calendar-day {
   opacity: 0.35;
 }
 .calendar-cell.selected {
-  background: color-mix(in srgb, #4a8665 7%, var(--surface, #fff));
+  background: var(--green-soft);
   box-shadow: inset 0 0 0 1.5px var(--green, #326650);
   z-index: 1;
 }
 .calendar-day {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -157,7 +153,7 @@ function accessibleLabel(cell) {
   font-size: 8px;
   padding: 2px 4px;
   background: var(--green, #326650);
-  color: #fff;
+  color: var(--on-accent, #fff);
   border-radius: 3px;
 }
 .calendar-cell-tasks {
@@ -173,8 +169,8 @@ function accessibleLabel(cell) {
   text-overflow: ellipsis;
   border-radius: 4px;
   padding: 4px 5px;
-  font-size: 9px;
-  color: var(--task-color);
+  font-size: 10px;
+  color: color-mix(in srgb, var(--task-color) 60%, var(--text));
   background: color-mix(in srgb, var(--task-color) 9%, transparent);
   line-height: 1.5;
 }
@@ -204,7 +200,7 @@ function accessibleLabel(cell) {
     min-height: 100px;
   }
   .calendar-task {
-    font-size: 8px;
+    font-size: 9px;
     padding: 3px;
   }
 }
@@ -225,7 +221,7 @@ function accessibleLabel(cell) {
   }
   .calendar-cell.today .calendar-day {
     background: var(--green, #326650);
-    color: #fff;
+    color: var(--on-accent, #fff);
     border-radius: 50%;
     width: 24px;
     height: 24px;
@@ -245,6 +241,15 @@ function accessibleLabel(cell) {
   .calendar-weekday {
     font-size: 10px;
     padding: 13px 0;
+  }
+}
+@media (max-width: 380px) {
+  .calendar-cell {
+    min-height: 64px;
+    padding: 7px 2px;
+  }
+  .calendar-mobile-dots {
+    gap: 2px;
   }
 }
 </style>

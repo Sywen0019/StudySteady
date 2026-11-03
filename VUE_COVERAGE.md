@@ -6,7 +6,7 @@
 
 路由定义见 [src/router/index.js:3](src/router/index.js#L3)：`/`、`/projects`、`/calendar`、`/analytics`、`/settings` 共 **5 个独立主页面**，另有 404 页；使用 `createWebHistory()`，入口通过 `RouterView` 渲染。
 
-对 `src/main.js` 出发的静态导入、动态导入及目录入口进行依赖图核对：**30 个 `.vue` 文件，30 个可达，无孤立组件**。运行时按页面和交互需要渲染；弹窗会在新建、编辑及确认操作中使用。
+对网页 `src/main.js` 出发的静态导入、动态导入及目录入口进行依赖图核对：**30 个 `.vue` 文件，30 个可达，无孤立组件**。该数量不包含独立的 `android-app/`；可达性表示依赖图能访问到组件，不等于每次运行都会显示。运行时按页面和交互需要渲染；弹窗会在新建、编辑及确认操作中使用。
 
 | 位置                        |   数量 | 实际职责                                                                              |
 | --------------------------- | -----: | ------------------------------------------------------------------------------------- |
@@ -37,7 +37,7 @@
 | 9. 生命周期钩子               | [TaskEditor.vue:22](src/components/tasks/TaskEditor.vue#L22)、[BaseModal.vue:26](src/components/ui/BaseModal.vue#L26)                                                                   | 编辑器挂载时聚焦输入框；弹窗挂载时注册键盘监听并锁定背景，卸载时清理与恢复焦点；打开弹窗直接输入，按 Tab 切换、按 Esc 关闭。         |
 | 10. 侦听器 `watch`            | [study.js:202](src/stores/study.js#L202)、[App.vue:25](src/App.vue#L25)                                                                                                                   | 深度侦听业务数据自动持久化，侦听主题更新根节点；新建任务刷新后检查保留，切换夜间主题刷新后检查保留。                                 |
 | 11. 模板引用                  | [TaskEditor.vue:21](src/components/tasks/TaskEditor.vue#L21)、[SettingsView.vue:25](src/views/SettingsView.vue#L25)                                                                       | `titleInput` 在编辑器挂载后聚焦；`fileInput` 由导入按钮触发系统文件选择；打开新建弹窗直接输入，再尝试选择备份文件。                  |
-| 12. 组件定义与复用            | [DashboardView.vue:262](src/views/DashboardView.vue#L262)、[CalendarView.vue:146](src/views/CalendarView.vue#L146)                                                                          | 同一 `TaskRow` 用于总览、项目列表和日历；`BaseModal` 用于任务、项目和确认弹窗，职责真实且一致。                                      |
+| 12. 组件定义与复用            | [DashboardView.vue:219](src/views/DashboardView.vue#L219)、[CalendarView.vue:146](src/views/CalendarView.vue#L146)                                                                          | 同一 `TaskRow` 用于总览、项目列表和日历；`BaseModal` 用于任务、项目和确认弹窗，职责真实且一致。                                      |
 | 13. Props                     | [ProjectCard.vue:13](src/components/projects/ProjectCard.vue#L13)、[CompletionRing.vue:3](src/components/analytics/CompletionRing.vue#L3)                                                 | 父页面向项目卡、完成率图传入项目、选中态和统计数据；切换项目或完成任务，组件由传入数据更新。                                         |
 | 14. Emits                     | [TaskFilters.vue:7](src/components/tasks/TaskFilters.vue#L7)、[TaskBoard.vue:6](src/components/tasks/TaskBoard.vue#L6)、[ThemePicker.vue:4](src/components/settings/ThemePicker.vue#L4) | 筛选组件发出 `update:modelValue`，看板发出 `status-change`，主题组件实现自定义 `v-model`；筛选任务、拖动卡片或通过状态选项移动任务。 |
 | 15. Slots                     | [BaseModal.vue:66](src/components/ui/BaseModal.vue#L66)、[PageHeader.vue:12](src/components/ui/PageHeader.vue#L12)、[TaskEditor.vue:112](src/components/tasks/TaskEditor.vue#L112)          | 默认插槽承载不同表单，`footer` 插槽定制弹窗按钮，`actions` 插槽定制页面操作；分别打开任务、项目编辑器比较表单与按钮。                |
@@ -55,4 +55,4 @@
 7. 取消一次删除确认，再执行一次删除；检查空态和提示。删除项目后任务保留为未归类。
 8. 以移动窗口操作导航、任务编辑与日历；用键盘测试弹窗 Esc、Tab 与按钮。
 
-自动检查入口：`npm test`（12 项测试）、`npm run audit`（数量与依赖图）、`npm run test:e2e`、`npm run build`。Netlify 的 SPA 回退由 `netlify.toml` 与 `public/_redirects` 提供。
+自动检查入口：`npm test`、`npm run audit`（数量与依赖图）、`npm run test:e2e`、`npm run build`。浏览器测试需先启动网页服务。2026-10-30 的检查结果及条件见 [VERIFICATION.md](VERIFICATION.md)。Netlify 的 SPA 回退由 `netlify.toml` 与 `public/_redirects` 提供；Android WebView 的运行和验证边界见 [Android 工程说明](README.md#android-运行)。

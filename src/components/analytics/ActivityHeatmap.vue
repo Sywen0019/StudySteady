@@ -114,12 +114,14 @@ const monthLabels = computed(() =>
 <style scoped>
 .heatmap-panel {
   padding: 25px 26px;
+  min-width: 0;
 }
 .heatmap-heading {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 12px;
+  flex-wrap: wrap;
 }
 .heatmap-heading p {
   font-size: 12px;
@@ -130,7 +132,8 @@ const monthLabels = computed(() =>
   color: var(--muted);
   border: 1px solid var(--border);
   padding: 6px 9px;
-  border-radius: 6px;
+  border-radius: 10px;
+  background: var(--surface-soft);
   white-space: nowrap;
 }
 .heatmap-scroll {
@@ -138,8 +141,8 @@ const monthLabels = computed(() =>
 }
 .heatmap-body {
   display: flex;
-  gap: 12px;
-  min-width: 330px;
+  gap: 10px;
+  min-width: 0;
   margin-top: 23px;
 }
 .weekday-labels {
@@ -151,14 +154,16 @@ const monthLabels = computed(() =>
   padding-top: 27px;
   width: 12px;
   padding-bottom: 3px;
+  flex-shrink: 0;
 }
 .heatmap-main {
   flex: 1;
+  min-width: 0;
 }
 .month-labels {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 7px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(3px, 0.6vw, 7px);
   font-size: 10px;
   color: var(--muted);
   height: 24px;
@@ -167,26 +172,26 @@ const monthLabels = computed(() =>
   display: grid;
   grid-template-rows: repeat(7, 13px);
   grid-auto-flow: column;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 7px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(3px, 0.6vw, 7px);
 }
 .heat-cell {
-  background: var(--bg);
+  background: color-mix(in srgb, var(--line) 70%, transparent);
   border-radius: 3px;
   min-height: 12px;
   transition: opacity 0.15s;
 }
 .heat-cell.level-1 {
-  background: #cfdfc5;
+  background: color-mix(in srgb, var(--green) 20%, var(--surface-soft));
 }
 .heat-cell.level-2 {
-  background: #a1bf91;
+  background: color-mix(in srgb, var(--green) 40%, var(--surface-soft));
 }
 .heat-cell.level-3 {
-  background: #6a9562;
+  background: color-mix(in srgb, var(--green) 68%, var(--surface-soft));
 }
 .heat-cell.level-4 {
-  background: #2f6e55;
+  background: var(--green);
 }
 .heat-cell.future {
   opacity: 0.3;
@@ -207,6 +212,7 @@ const monthLabels = computed(() =>
   color: var(--muted);
   margin-top: 20px;
   gap: 10px;
+  flex-wrap: wrap;
 }
 .heatmap-legend > div {
   display: flex;

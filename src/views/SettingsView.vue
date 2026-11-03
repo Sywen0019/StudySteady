@@ -352,6 +352,9 @@ function clearAll() {
   align-items: center;
   margin-bottom: 25px;
 }
+.settings-section-heading > div {
+  min-width: 0;
+}
 .settings-section-heading p {
   font-size: 12px;
   margin: 7px 0 0;
@@ -368,8 +371,8 @@ function clearAll() {
   flex-shrink: 0;
 }
 .settings-section-icon.warm {
-  background: #faf0e5;
-  color: #b9814c;
+  background: color-mix(in srgb, var(--orange) 12%, transparent);
+  color: var(--orange);
 }
 .settings-section-icon.neutral {
   background: var(--bg);
@@ -387,6 +390,7 @@ function clearAll() {
   display: flex;
   flex-direction: column;
   gap: 9px;
+  min-width: 0;
 }
 .field-label > span {
   font-size: 11px;
@@ -460,6 +464,7 @@ function clearAll() {
   line-height: 1.7;
   color: var(--muted);
   margin: 0;
+  overflow-wrap: anywhere;
 }
 .data-action-row button {
   font-size: 11px;
@@ -492,8 +497,8 @@ function clearAll() {
   line-height: 1.9;
   color: var(--muted);
   padding: 12px 14px;
-  background: var(--bg);
-  border-radius: 7px;
+  background: var(--surface-soft);
+  border-radius: 12px;
   margin: 12px 0 0;
 }
 .reset-section .settings-section-heading {
@@ -575,8 +580,8 @@ function clearAll() {
 }
 .storage-tip {
   padding: 11px 10px;
-  border-radius: 7px;
-  background: var(--bg);
+  border-radius: 12px;
+  background: var(--surface-soft);
   display: flex;
   gap: 7px;
   align-items: center;
@@ -624,7 +629,7 @@ function clearAll() {
   }
   .settings-aside {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 20px;
   }
   .settings-signature {
@@ -670,6 +675,25 @@ function clearAll() {
   }
   .settings-section-heading p {
     font-size: 11px;
+  }
+}
+@media (max-width: 480px) {
+  .number-fields {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+  .data-action-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .data-action-row button {
+    min-height: 42px;
+    padding: 10px 14px;
+    font-size: 11px;
+  }
+  .storage-card {
+    padding: 22px 18px;
   }
 }
 </style>

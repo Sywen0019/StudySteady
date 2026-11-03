@@ -95,12 +95,14 @@ const hasActivity = computed(() =>
 .trend-panel {
   padding: 25px 26px;
   position: relative;
+  min-width: 0;
 }
 .chart-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 12px;
+  flex-wrap: wrap;
 }
 .chart-header p {
   font-size: 12px;
@@ -109,9 +111,9 @@ const hasActivity = computed(() =>
 .chart-switch {
   display: flex;
   padding: 3px;
-  background: var(--bg);
+  background: var(--surface-soft);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 12px;
   flex-shrink: 0;
 }
 .chart-switch button {
@@ -121,7 +123,7 @@ const hasActivity = computed(() =>
   padding: 6px 8px;
   font-size: 11px;
   border: 0;
-  border-radius: 5px;
+  border-radius: 8px;
   background: transparent;
   color: var(--muted);
   cursor: pointer;
@@ -150,6 +152,7 @@ const hasActivity = computed(() =>
   width: 26px;
   height: 178px;
   text-align: right;
+  flex-shrink: 0;
 }
 .plot-area {
   flex: 1;
@@ -194,15 +197,15 @@ const hasActivity = computed(() =>
   max-width: 39px;
   min-height: 3px;
   width: 100%;
-  background: var(--green);
-  border-radius: 5px 5px 0 0;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--green) 75%, var(--surface)), var(--green));
+  border-radius: 8px 8px 2px 2px;
   position: relative;
   transition:
     height 0.25s,
     background 0.15s;
 }
 .bar-column:nth-child(even) .chart-bar {
-  background: #a4bc9b;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--green) 25%, var(--surface)), color-mix(in srgb, var(--green) 60%, var(--surface)));
 }
 .chart-bar:hover {
   background: var(--orange);
@@ -263,11 +266,17 @@ const hasActivity = computed(() =>
 .chart-empty {
   position: absolute;
   top: 53%;
-  left: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100% - 56px);
+  text-align: center;
   font-size: 12px;
   color: var(--muted);
   background: var(--surface);
   padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
 }
 @media (max-width: 600px) {
   .trend-panel {
@@ -284,7 +293,6 @@ const hasActivity = computed(() =>
     padding: 0 4px;
   }
   .chart-empty {
-    left: 17%;
     font-size: 10px;
   }
   .chart-legend span {

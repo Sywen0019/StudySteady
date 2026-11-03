@@ -118,82 +118,39 @@ const goalPercent = computed(() =>
           >开始今天的学习<ArrowRight :size="16"
         /></RouterLink>
       </div>
-      <svg
-        class="growth-illustration"
-        viewBox="0 0 360 180"
-        fill="none"
-        aria-hidden="true"
-      >
-        <path
-          d="M48 151h267"
-          stroke="#93a786"
-          stroke-width="1.2"
-          stroke-dasharray="3 5"
-        />
-        <ellipse cx="237" cy="152" rx="82" ry="7" fill="#dae1c8" />
-        <path
-          d="m173 131 87-6 29 19-88 6-28-19Z"
-          fill="#b4c899"
-          stroke="#52734c"
-        />
-        <path
-          d="m173 122 87-6 29 19-88 6-28-19Z"
-          fill="#f3e9d0"
-          stroke="#52734c"
-        />
-        <path d="M173 122v9m28 10v9m88-15v9" stroke="#52734c" />
-        <path d="m184 104 77 3 20 15-78-2-19-16Z" fill="#52734c" />
-        <path
-          d="m184 99 77 3 20 15-78-2-19-16Z"
-          fill="#f8f3df"
-          stroke="#52734c"
-        />
-        <path
-          d="M238 97V48m0 27c-25-1-33-16-32-29 23 0 34 11 32 29Z"
-          fill="#91aa79"
-          stroke="#52734c"
-          stroke-width="1.4"
-        />
-        <path
-          d="M239 62c-2-19 13-33 31-31-1 20-13 32-31 31Z"
-          fill="#c5d4a7"
-          stroke="#52734c"
-          stroke-width="1.4"
-        />
-        <path
-          d="m226 91 28 1-5 21h-18l-5-22Z"
-          fill="#cc9066"
-          stroke="#946e4d"
-        />
-        <path d="M230 96h20" stroke="#f5d7b4" />
-        <path
-          d="M100 75h52v66h-52z"
-          fill="#faf8e9"
-          stroke="#96a581"
-          transform="rotate(-9 100 75)"
-        />
-        <path
-          d="m111 88 28-4m-26 15 28-4m-26 15 19-3"
-          stroke="#b0bc9c"
-          stroke-width="2"
-        />
-        <path
-          d="m147 125 26-37 5 4-26 37-7 5 2-9Z"
-          fill="#d6a369"
-          stroke="#a57d49"
-        />
-        <path
-          d="m314 76 4 7 8 1-6 6 1 8-7-4-7 4 1-8-6-6 8-1 4-7Z"
-          fill="#c6d39f"
-        />
-        <path
-          d="M183 40v12m-6-6h12m111 73v8m-4-4h8M92 45v8m-4-4h8"
-          stroke="#98ad7e"
-          stroke-width="1.7"
-          stroke-linecap="round"
-        />
-        <circle cx="284" cy="48" r="3" fill="#c99a66" /></svg
-      ><span class="banner-index">01 / ONE DAY AT A TIME</span>
+      <div class="glass-sculpture" aria-hidden="true">
+        <div class="sculpture-glow" />
+        <svg viewBox="0 0 380 250" fill="none">
+          <defs>
+            <linearGradient id="orbit-glass" x1="80" y1="30" x2="290" y2="220" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#fff" stop-opacity=".95" />
+              <stop offset=".3" stop-color="#b7e7dd" stop-opacity=".55" />
+              <stop offset=".52" stop-color="#fff" stop-opacity=".9" />
+              <stop offset=".73" stop-color="#6aafa4" stop-opacity=".4" />
+              <stop offset="1" stop-color="#ecffff" stop-opacity=".95" />
+            </linearGradient>
+            <linearGradient id="orb-glass" x1="145" y1="60" x2="240" y2="180" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#fff" stop-opacity=".8" />
+              <stop offset="1" stop-color="#b8e7da" stop-opacity=".35" />
+            </linearGradient>
+            <filter id="orbit-shadow" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="0" dy="14" stdDeviation="10" flood-color="#26786c" flood-opacity=".14" />
+            </filter>
+          </defs>
+          <g filter="url(#orbit-shadow)">
+            <ellipse cx="195" cy="124" rx="116" ry="76" transform="rotate(-30 195 124)" stroke="url(#orbit-glass)" stroke-width="28" />
+            <ellipse cx="195" cy="124" rx="126" ry="85" transform="rotate(-30 195 124)" stroke="white" stroke-opacity=".65" />
+            <circle cx="195" cy="119" r="59" fill="url(#orb-glass)" stroke="white" stroke-opacity=".8" />
+            <path d="M195 147v-32m0 13c-20 0-29-12-27-26 19 0 29 11 27 26Zm0-12c0-20 12-30 29-29 0 18-12 30-29 29Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="currentColor" fill-opacity=".07" />
+            <path d="M157 86a51 51 0 0 1 57-14" stroke="white" stroke-width="3" stroke-linecap="round" />
+          </g>
+          <circle cx="301" cy="59" r="12" fill="url(#orb-glass)" stroke="white" />
+          <circle cx="95" cy="185" r="7" fill="url(#orb-glass)" stroke="white" />
+          <path d="M100 63v12m-6-6h12m173 117v10m-5-5h10" stroke="currentColor" stroke-opacity=".4" stroke-linecap="round" />
+        </svg>
+        <span class="sculpture-caption"><Sprout :size="14" />以自己的节奏，生长</span>
+      </div>
+      <span class="banner-index">ONE DAY AT A TIME</span>
     </section>
     <div class="stats-grid">
       <StatCard
@@ -351,7 +308,7 @@ const goalPercent = computed(() =>
               : "按自己的节奏来，你已经在路上。"
           }}</span>
         </section>
-        <section class="upcoming-panel">
+        <section class="panel upcoming-panel">
           <div class="section-heading">
             <h2>接下来</h2>
             <RouterLink to="/calendar" class="text-link"
